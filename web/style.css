@@ -41,17 +41,9 @@ body {
   font-feature-settings: "cv02", "cv03", "cv04", "ss01";
 }
 
-/* Professional Header Bar */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2.5rem;
-  background-color: #0b0f19;
-  border-bottom: 1px solid var(--border-main);
+/* Legacy Header Bar */
+.legacy-header-unused {
+  display: none;
 }
 
 .brand {
