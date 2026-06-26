@@ -126,11 +126,10 @@ def create_subgraph_viz(
         if is_center:
             size = max(size, 36)
 
-        title = f"<div style='font-family:monospace;padding:6px;'><b style='color:#38bdf8;font-size:14px;'>{node}</b><hr style='border:0;border-top:1px solid #334155;margin:4px 0;'><b style='color:#cbd5e1;'>Entity Category:</b> {ntype}<br><b style='color:#cbd5e1;'>Graph Centrality Score:</b> {centrality_val}<br><b style='color:#cbd5e1;'>Interactome Degree:</b> {degree}"
+        title = f"{node}\nCategory: {ntype}\nCentrality Score: {centrality_val}\nInteractome Degree: {degree}"
         aliases = data.get("aliases", [])
         if aliases:
-            title += f"<br><b style='color:#cbd5e1;'>Ontology Aliases:</b> {', '.join(aliases[:3])}"
-        title += "</div>"
+            title += f"\nOntology Aliases: {', '.join(aliases[:3])}"
 
         net.add_node(
             node,
@@ -151,10 +150,9 @@ def create_subgraph_viz(
         width = 1.5 + confidence * 3
         color = "#334155" if confidence < 0.5 else "#64748b"
 
-        title = f"<div style='font-family:monospace;padding:4px;'><b style='color:#38bdf8;'>Relation:</b> {relation}<br><b style='color:#cbd5e1;'>Derived Confidence:</b> {confidence:.2f}"
+        title = f"Relation: {relation}\nConfidence Score: {confidence:.2f}"
         if evidence:
-            title += f"<br><b style='color:#94a3b8;'>Vector Evidence:</b> {evidence}..."
-        title += "</div>"
+            title += f"\nEvidence: {evidence}..."
 
         net.add_edge(u, v, title=title, label=relation, width=width, color=color)
 
