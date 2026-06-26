@@ -1,0 +1,2357 @@
+:root {
+  /* Claude Editorial Warm Obsidian & Terracotta Palette */
+  --bg-page: #131416;
+  --bg-card: #1c1d20;
+  --bg-input: #232428;
+  --bg-hover: #2a2b30;
+  
+  --border-main: rgba(244, 243, 237, 0.09);
+  --border-focus: #da7756;
+  
+  --primary-blue: #da7756;
+  --primary-hover: #c56544;
+  --text-main: #faf9f5;
+  --text-muted: #a8a69e;
+  --text-dim: #7c7a73;
+  
+  --status-verified: #5fa887;
+  --status-warn: #e89a5e;
+  --status-error: #da5656;
+  
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  line-height: 1.65;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+}
+
+/* Professional Header Bar */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  background-color: #0b0f19;
+  border-bottom: 1px solid var(--border-main);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.status-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--status-verified);
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-tab {
+  font-family: var(--font-main);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-tab:hover {
+  color: #ffffff;
+  background-color: var(--bg-card);
+}
+
+.nav-tab.active {
+  color: #ffffff;
+  background-color: var(--bg-card);
+  border-color: var(--border-main);
+}
+
+/* Main Layout & Tabs */
+main {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.tab-view {
+  display: none;
+}
+
+.tab-view.active {
+  display: block;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Professional Search Box */
+.search-container {
+  margin-top: 2.5rem;
+}
+
+.search-box {
+  display: flex;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.search-box:focus-within {
+  border-color: var(--border-focus);
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  padding: 0.6rem 1rem;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-dim);
+}
+
+.search-btn {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.5rem;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.search-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Clean Example Buttons */
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.example-chip {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-main);
+  color: var(--text-muted);
+  font-family: var(--font-main);
+  font-size: 0.825rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.example-chip:hover {
+  border-color: var(--border-focus);
+  color: #ffffff;
+}
+
+/* Clinical Report Results Area */
+.results-area {
+  margin-top: 3rem;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-main);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-main);
+}
+
+.query-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.card-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.trust-badge.supported {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--status-verified);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.trust-badge.questionable {
+  background-color: rgba(245, 158, 11, 0.12);
+  color: var(--status-warn);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.trust-badge.hallucinated {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: var(--status-error);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Structured Report Typography (No Raw Markdown) */
+.report-content {
+  font-size: 0.975rem;
+  line-height: 1.75;
+  color: #e2e8f0;
+}
+
+.report-h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 1.75rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.report-h4 {
+  font-size: 1.025rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.report-para {
+  margin-bottom: 1rem;
+}
+
+.report-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.report-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding-left: 0.5rem;
+}
+
+.report-bullet {
+  color: var(--primary-blue);
+  font-weight: 700;
+}
+
+/* Provenance Claim Verification Table */
+.provenance-section {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-main);
+}
+
+.provenance-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.provenance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.provenance-card {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.provenance-card.hypothesis {
+  border-left: 4px solid #c084fc;
+}
+
+.provenance-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.status-pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.6rem;
+  border-radius: 4px;
+}
+
+.status-pill.verified {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: var(--status-verified);
+}
+
+.status-pill.unverified {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--status-error);
+}
+
+.status-pill.hypothesis {
+  background-color: rgba(168, 85, 247, 0.18);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.4);
+}
+
+.provenance-claim-text {
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.provenance-citation {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.provenance-citation strong {
+  color: #cbd5e1;
+}
+
+/* Loader Styling */
+.loader-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border-main);
+  border-top-color: var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Graph Container */
+.graph-container {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-main);
+  border-radius: 12px;
+  height: 720px;
+  overflow: hidden;
+}
+
+.graph-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Action Bar & History Buttons */
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.action-btn {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-main);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.action-btn:hover {
+  color: #ffffff;
+  border-color: var(--border-focus);
+}
+
+.clear-feed-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+/* Clickable Biological Entity Badges */
+.entity-link {
+  color: var(--primary-blue);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  border-bottom: 1px dashed var(--primary-blue);
+  transition: all 0.15s ease;
+}
+
+.entity-link:hover {
+  color: #38bdf8;
+  border-bottom-style: solid;
+  background-color: rgba(14, 165, 233, 0.1);
+  border-radius: 2px;
+}
+
+/* Graph Explorer Analytical Toolbar */
+.graph-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.toolbar-select, .toolbar-input {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-main);
+  color: #ffffff;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  outline: none;
+}
+
+.toolbar-input {
+  width: 180px;
+}
+
+/* ==========================================================================
+   ENTERPRISE BIOMEDICAL RESEARCH WORKSTATION REFINEMENTS (Senior Engineering)
+   ========================================================================== */
+
+/* 1. Analytical Research Dashboard Widgets Bar */
+.dashboard-widgets-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+  background-color: rgba(15, 23, 42, 0.45);
+  border-top: 1px solid var(--border-main);
+  border-bottom: 1px solid var(--border-main);
+  padding: 0.85rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.dash-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dash-val {
+  font-family: monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: -0.02em;
+}
+
+.dash-lbl {
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  margin-top: 0.15rem;
+}
+
+/* 2. Interactive Citation Chips (Replacing Plain Text PMIDs) */
+.citation-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8 !important;
+  font-family: monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.18rem 0.55rem;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 0 0.25rem;
+  transition: all 0.15s ease;
+  vertical-align: baseline;
+}
+
+.citation-chip:hover {
+  background-color: rgba(56, 189, 248, 0.15);
+  border-color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+  transform: translateY(-1px);
+}
+
+/* 3. Interactive Multi-Hop Graph Traversal Modules */
+.traversal-module {
+  background-color: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.traversal-module-hdr {
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.06em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  border-bottom: 1px dashed rgba(56, 189, 248, 0.2);
+  padding-bottom: 0.4rem;
+}
+
+.traversal-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.5rem 0;
+}
+
+.traversal-node {
+  font-family: monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.traversal-node.disease { background: rgba(78, 205, 196, 0.15); border: 1px solid #4ECDC4; color: #4ECDC4; }
+.traversal-node.gene    { background: rgba(255, 230, 109, 0.15); border: 1px solid #FFE66D; color: #FFE66D; }
+.traversal-node.drug    { background: rgba(255, 107, 107, 0.15); border: 1px solid #FF6B6B; color: #FF6B6B; }
+
+.traversal-node:hover {
+  filter: brightness(1.25);
+  transform: scale(1.04);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.traversal-arrow {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.traversal-module-ftr {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  margin-top: 0.85rem;
+  font-style: italic;
+}
+
+/* 4. Responsive HTML Research Tables */
+.table-responsive {
+  margin: 1.75rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  background-color: rgba(10, 10, 10, 0.5);
+}
+
+.research-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.research-table th {
+  background-color: rgba(30, 41, 59, 0.7);
+  color: #f8fafc;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 2px solid #334155;
+  font-family: var(--font-main);
+}
+
+.research-table td {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+}
+
+.research-table tr:last-child td {
+  border-bottom: none;
+}
+
+.research-table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+}
+
+.table-footnote {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  padding: 0.65rem 1.25rem;
+  background-color: rgba(15, 23, 42, 0.35);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  line-height: 1.4;
+}
+
+/* 5. Improved Paragraph & Module Spacing (Readability Pass) */
+.report-content {
+  padding: 1.75rem 1.5rem;
+}
+
+.report-para {
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+
+.report-h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.85rem;
+  color: #f8fafc;
+  font-size: 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 0.5rem;
+}
+
+.report-h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #38bdf8;
+  font-size: 1.05rem;
+}
+
+/* Card Entrance Animation */
+/* Card Entrance Animation */
+.card {
+  animation: cardEntrance 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardEntrance {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   STAFF FRONTEND ENGINEER AUDIT ACCESSIBILITY & ERGONOMICS PASS (WCAG AA)
+   ========================================================================== */
+
+/* 1. Universal Crisp Accessibility Keyboard Focus Indicators */
+:focus-visible {
+  outline: 2px solid #38bdf8 !important;
+  outline-offset: 3px !important;
+}
+
+button:focus-visible, input:focus-visible, select:focus-visible, [role="button"]:focus-visible {
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.25);
+}
+
+.status-monitor-text {
+  font-family: monospace;
+  font-size: 0.78rem;
+  color: #38bdf8;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* 2. Permanent Workstation Welcome State Banner */
+.workstation-welcome-banner {
+  background-color: rgba(15, 23, 42, 0.45);
+  border: 1px dashed rgba(56, 189, 248, 0.35);
+  border-radius: 12px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  margin: 1.5rem 0 3rem;
+}
+
+.welcome-hdr {
+  font-family: monospace;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.welcome-body {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* 3. Animated Computational Biology Pipeline Tracker */
+.pipeline-tracker {
+  padding: 2.25rem 2rem;
+  background-color: rgba(15, 23, 42, 0.75);
+  border-left: 4px solid #38bdf8;
+  border-radius: 8px;
+}
+
+.pipeline-hdr {
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.pipeline-query-sub {
+  font-size: 0.95rem;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 0.75rem;
+}
+
+.pipeline-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-family: monospace;
+  font-size: 0.86rem;
+}
+
+.pipe-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.pipe-step.pending { color: var(--text-dim); opacity: 0.6; }
+.pipe-step.active  { color: #38bdf8; background-color: rgba(56, 189, 248, 0.1); font-weight: 700; }
+.pipe-step.done    { color: #10b981; }
+
+.pipe-icon {
+  font-size: 1.05rem;
+  display: inline-block;
+  width: 24px;
+  text-align: center;
+}
+
+/* 4. Fluid Viewport Responsiveness (< 768px Mobile Ergonomics) */
+@media (max-width: 768px) {
+  .header-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .graph-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .toolbar-group {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .toolbar-input {
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   14-POINT SENIOR PRODUCT ENGINEERING REFINEMENT SUITE
+   ========================================================================== */
+
+/* Utility Separations (Eliminating Inline Styles) */
+.mt-results { margin-top: 0.5rem; }
+.hero-graph-margin { margin-bottom: 1.5rem; }
+.btn-spotlight { padding: 0.45rem 1rem; }
+.shortcut-btn { margin-top: 0.5rem; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid #38bdf8; }
+.shortcut-btn:hover { background: #38bdf8; color: #0f172a; }
+
+/* 1. Structured Onboarding Empty State (Priority 9) */
+.onboarding-empty-state {
+  background-color: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+}
+
+.welcome-sub {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto 2.25rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.onboarding-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.onboarding-card {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.onboarding-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+}
+
+.onb-hdr {
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.onb-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+.onb-desc {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.entity-chips-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.entity-tag {
+  font-family: monospace;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.entity-tag.gene    { background: rgba(255, 230, 109, 0.15); color: #FFE66D; border: 1px solid rgba(255, 230, 109, 0.3); }
+.entity-tag.disease { background: rgba(78, 205, 196, 0.15); color: #4ECDC4; border: 1px solid rgba(78, 205, 196, 0.3); }
+.entity-tag.drug    { background: rgba(255, 107, 107, 0.15); color: #FF6B6B; border: 1px solid rgba(255, 107, 107, 0.3); }
+
+/* 2. Sticky Report Quick Navigation Bar (Priority 3) */
+.card-quick-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.65rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.quick-nav-link {
+  font-family: monospace;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.quick-nav-link:hover {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+/* 3. Collapsible Analysis Modules (Priority 3) */
+.analysis-module-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.analysis-module-hdr:hover {
+  background-color: rgba(56, 189, 248, 0.08);
+}
+
+.toggle-icon {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #38bdf8;
+  transition: transform 0.25s ease;
+}
+
+.analysis-module.collapsed .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.analysis-module.collapsed .analysis-module-body {
+  display: none;
+}
+
+/* 4. Epistemic Provenance Metadata Cards Grid (Priority 4) */
+.prov-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.85rem;
+  padding: 1.25rem;
+}
+
+.prov-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+}
+
+.prov-lbl {
+  font-family: monospace;
+  font-size: 0.72rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.prov-val {
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+/* 5. Enterprise Claim Verification Audit Cards (Priority 5) */
+.audit-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.audit-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 4px solid #10b981;
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.audit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+.audit-card.questionable { border-left-color: #f59e0b; }
+.audit-card.hallucinated { border-left-color: #ef4444; }
+
+.audit-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.audit-badge {
+  font-family: monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.audit-badge.supported    { background: rgba(16, 185, 129, 0.18); color: #34d399; }
+.audit-badge.questionable { background: rgba(245, 158, 11, 0.18); color: #fbbf24; }
+.audit-badge.hallucinated { background: rgba(239, 68, 68, 0.18);  color: #f87171; }
+
+.audit-meta-tags {
+  display: flex;
+  gap: 0.5rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.audit-claim-text {
+  font-size: 0.96rem;
+  color: #f8fafc;
+  line-height: 1.6;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.audit-details summary {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #38bdf8;
+  cursor: pointer;
+  user-select: none;
+}
+
+.audit-rationale {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.35);
+  border-radius: 6px;
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+/* 6. Sortable Ranking Table & Progress Bars (Priority 6) */
+.sortable-th {
+  cursor: pointer;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  background: #1e293b;
+  z-index: 10;
+}
+
+.sortable-th:hover {
+  color: #38bdf8;
+}
+
+.sort-indicator {
+  font-size: 0.75rem;
+  margin-left: 0.35rem;
+  opacity: 0.5;
+}
+
+.centrality-bar-wrap {
+  width: 100px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  height: 8px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.centrality-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   ENTERPRISE BIOMEDICAL ANALYTICS PLATFORM DASHBOARD STYLES
+   ========================================================================== */
+
+.dashboard-report-workspace {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding-bottom: 4rem;
+}
+
+/* 5. Compact Technical Telemetry Metadata Ribbon */
+.enterprise-metadata-ribbon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.85rem 1.5rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+.ribbon-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ribbon-icon { font-size: 1rem; }
+.ribbon-lbl { color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; }
+.ribbon-val { color: #e2e8f0; font-weight: 700; }
+
+.ribbon-trust.supported .ribbon-val { color: #34d399; }
+.ribbon-trust.questionable .ribbon-val { color: #fbbf24; }
+.ribbon-trust.hallucinated .ribbon-val { color: #f87171; }
+
+/* Dashboard Title Bar */
+.dashboard-title-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.title-eyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+
+.dashboard-query-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.title-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Sticky Section Navigation */
+.dashboard-sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+.sticky-nav-lbl {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #38bdf8;
+  margin-right: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.sticky-nav-item {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  text-decoration: none;
+}
+
+.sticky-nav-item:hover {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
+
+/* 7. Increased Whitespace between sections & Stack Grid */
+.dashboard-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+}
+
+/* 2. Structured Report Cards */
+.enterprise-report-card {
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.enterprise-report-card:hover {
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.65);
+}
+
+/* Accent Borders */
+.card-accent-blue    { border-top: 4px solid #38bdf8; }
+.card-accent-teal    { border-top: 4px solid #14b8a6; }
+.card-accent-purple  { border-top: 4px solid #a855f7; }
+.card-accent-gold    { border-top: 4px solid #f59e0b; }
+.card-accent-emerald { border-top: 4px solid #10b981; }
+.card-accent-slate   { border-top: 4px solid #64748b; }
+
+/* 6. Section Headers */
+.report-card-hdr {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.25rem 2rem;
+  background: #1e293b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.card-icon { font-size: 1.5rem; }
+
+.card-title-txt {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: 0.01em;
+}
+
+.report-card-body {
+  padding: 2.25rem 2rem;
+  color: #e2e8f0;
+  line-height: 1.7;
+  font-size: 1.02rem;
+}
+
+.exec-para { margin: 0 0 1.25rem; }
+
+/* Callouts */
+.hypothesis-callout {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-left: 4px solid #38bdf8;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+}
+
+.callout-icon { font-size: 1.5rem; flex-shrink: 0; }
+.callout-txt { font-size: 0.98rem; color: #f0f9ff; line-height: 1.6; }
+
+/* 9. Findings Rows & Aligned PMID Chips */
+.findings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.finding-card-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(30, 41, 59, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #14b8a6;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.finding-card-row:hover {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(20, 184, 166, 0.4);
+  transform: translateX(4px);
+}
+
+.finding-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  flex: 1;
+  min-width: 260px;
+}
+
+.finding-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #14b8a6;
+  margin-top: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px #14b8a6;
+}
+
+.finding-text {
+  font-size: 1rem;
+  color: #f1f5f9;
+  line-height: 1.65;
+}
+
+.compact-pmid-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  background: #0284c7;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.4);
+  transition: all 0.2s ease;
+}
+
+.compact-pmid-chip:hover {
+  background: #0369a1;
+  transform: scale(1.03);
+  color: #ffffff;
+}
+
+.compact-pmid-chip.kg-chip {
+  background: #334155;
+  box-shadow: none;
+}
+
+/* 8. Entity Badges */
+.entity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.2rem 0.65rem;
+  border-radius: 6px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.84rem;
+  font-weight: 700;
+  margin: 0 2px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.entity-badge:hover {
+  transform: scale(1.06);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.entity-badge.gene {
+  background: rgba(254, 240, 138, 0.18);
+  color: #fde047;
+  border: 1px solid rgba(254, 240, 138, 0.4);
+}
+
+.entity-badge.disease {
+  background: rgba(153, 246, 228, 0.18);
+  color: #5eead4;
+  border: 1px solid rgba(153, 246, 228, 0.4);
+}
+
+.entity-badge.drug {
+  background: rgba(251, 113, 133, 0.18);
+  color: #fda4af;
+  border: 1px solid rgba(251, 113, 133, 0.4);
+}
+
+.report-strong { color: #ffffff; font-weight: 700; }
+
+/* 4. Knowledge Graph Topology Canvas */
+.viz-container-padding { padding: 3rem 2rem; }
+
+.kg-viz-canvas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2.5rem;
+  background: radial-gradient(circle at center, #111827 0%, #090d16 100%);
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+}
+
+.kg-node {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.75rem;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.kg-node:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.8);
+}
+
+.kg-node.gene {
+  background: linear-gradient(135deg, #713f12 0%, #a16207 100%);
+  color: #fef08a;
+  border: 1px solid #eab308;
+}
+
+.kg-node.disease {
+  background: linear-gradient(135deg, #0f5132 0%, #0d9488 100%);
+  color: #ccfbf1;
+  border: 1px solid #14b8a6;
+}
+
+.kg-node.drug {
+  background: linear-gradient(135deg, #881337 0%, #e11d48 100%);
+  color: #ffe4e6;
+  border: 1px solid #f43f5e;
+}
+
+.kg-edge-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.edge-lbl {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: #1e293b;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #0284c7;
+  letter-spacing: 0.03em;
+}
+
+.edge-arr {
+  color: #38bdf8;
+  font-size: 1.4rem;
+  font-weight: 900;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+}
+
+/* 3. Candidate Ranking Sortable Table */
+.table-container-padding { padding: 1.5rem; }
+
+.enterprise-ranking-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  font-size: 0.96rem;
+}
+
+.enterprise-ranking-table th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #1e293b;
+  color: #94a3b8;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 2px solid #38bdf8;
+}
+
+.enterprise-ranking-table td {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #1e293b;
+  color: #e2e8f0;
+  vertical-align: middle;
+}
+
+.enterprise-ranking-table tbody tr {
+  transition: all 0.15s ease;
+}
+
+.enterprise-ranking-table tbody tr:nth-child(even) {
+  background: rgba(30, 41, 59, 0.35);
+}
+
+.enterprise-ranking-table tbody tr:hover {
+  background: rgba(56, 189, 248, 0.14);
+  transform: scale(1.002);
+}
+
+.metric-bar-wrap {
+  width: 110px;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.metric-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(56,189,248,0.5);
+}
+
+.evidence-status-badge {
+  display: inline-block;
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.evidence-status-badge.approved {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid #10b981;
+}
+
+.evidence-status-badge.investigational {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border: 1px solid #a855f7;
+}
+
+.evidence-status-badge.warning {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid #f59e0b;
+}
+
+.evidence-status-badge.phase2 {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid #0284c7;
+}
+
+/* Claim Verification Cards */
+.claim-audit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.claim-audit-row {
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 4px solid #10b981;
+  border-radius: 10px;
+}
+
+.claim-audit-row.questionable { border-left-color: #f59e0b; }
+.claim-audit-row.unverified { border-left-color: #ef4444; }
+
+.claim-top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.claim-status-tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.claim-status-tag.supported { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+.claim-status-tag.questionable { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+.claim-status-tag.unverified { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+.claim-prov-info { font-family: var(--font-mono, monospace); font-size: 0.78rem; color: #64748b; }
+
+.claim-statement { font-size: 1.05rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.85rem; }
+.claim-rationale { font-size: 0.92rem; color: #cbd5e1; background: rgba(0,0,0,0.3); padding: 0.85rem; border-radius: 6px; }
+
+/* Provenance Grid Modern */
+.provenance-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.prov-modern-item {
+  padding: 1.25rem;
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+}
+
+.p-lbl {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.p-val {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+/* ==========================================================================
+   CALM, PREMIUM LINEAR & VERCEL ENTERPRISE BIOMEDICAL PLATFORM STYLES
+   ========================================================================== */
+
+.saas-report-canvas {
+  width: 100%;
+  background: #131416;
+  color: #faf9f5;
+  font-family: var(--font-main);
+  padding: 3rem 1.5rem 6rem;
+}
+
+.saas-workspace-container {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* 1. Report Header */
+.saas-report-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.saas-header-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.saas-query-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 600px;
+}
+
+.saas-conf-badge {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.saas-conf-badge.conf-supported {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+.saas-conf-badge.conf-questionable {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+.saas-conf-badge.conf-hallucinated {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.saas-query-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.saas-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.saas-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.saas-btn svg { flex-shrink: 0; }
+
+.saas-btn-subtle {
+  background: rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.saas-btn-subtle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.saas-btn-accent {
+  background: #da7756;
+  color: #ffffff;
+  border: 1px solid #e89a5e;
+  box-shadow: 0 4px 14px rgba(218, 119, 86, 0.35);
+}
+.saas-btn-accent:hover {
+  background: #c56544;
+  box-shadow: 0 6px 20px rgba(218, 119, 86, 0.45);
+}
+
+.saas-header-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+}
+
+.saas-metric { display: flex; align-items: center; gap: 0.5rem; }
+.saas-m-val { color: #f8fafc; font-weight: 700; font-size: 0.95rem; }
+.saas-m-lbl { color: #64748b; }
+.saas-m-sep { width: 4px; height: 4px; border-radius: 50%; background: #334155; }
+
+/* Section Structures */
+.saas-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.saas-sec-hdr {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.saas-sec-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+}
+
+/* Modern Cards */
+.saas-card {
+  background: #1c1d20;
+  border: 1px solid rgba(244, 243, 237, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.saas-card:hover {
+  border-color: rgba(218, 119, 86, 0.28);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+
+.saas-summary-card { padding: 2.25rem 2.5rem; }
+
+.saas-summary-text {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #e2e8f0;
+  letter-spacing: 0.005em;
+}
+
+/* Findings Grid */
+.saas-findings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.saas-finding-card {
+  background: #1c1d20;
+  border: 1px solid rgba(244, 243, 237, 0.08);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.saas-finding-card:hover {
+  background: #232428;
+  border-color: rgba(218, 119, 86, 0.35);
+}
+
+.saas-finding-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.saas-entity-pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-gene { background: rgba(232, 154, 94, 0.15); color: #e89a5e; }
+.badge-disease { background: rgba(95, 168, 135, 0.15); color: #5fa887; }
+.badge-drug { background: rgba(218, 119, 86, 0.15); color: #da7756; }
+
+.saas-pmid-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #e89a5e;
+  background: rgba(232, 154, 94, 0.12);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.saas-pmid-chip:hover {
+  background: rgba(232, 154, 94, 0.22);
+}
+
+.saas-finding-desc {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: #f1f5f9;
+}
+
+/* Knowledge Graph Reasoning Viz */
+.saas-kg-workspace { padding: 3rem 2rem; }
+
+.bloom-viz-canvas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.bloom-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1.15rem 2rem;
+  border-radius: 12px;
+  background: #232428;
+  border: 1px solid rgba(244, 243, 237, 0.08);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bloom-node:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.7);
+}
+
+.b-type {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.b-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.b-disease { background: rgba(95, 168, 135, 0.15); border-color: #5fa887; color: #a1bfae; }
+.b-gene { background: rgba(232, 154, 94, 0.15); border-color: #e89a5e; color: #f3c7a3; }
+.b-drug { background: rgba(218, 119, 86, 0.15); border-color: #da7756; color: #f2b7a2; }
+
+.bloom-edge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  position: relative;
+  padding: 0 0.5rem;
+}
+
+.bloom-edge-line {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #da7756, #e89a5e);
+  border-radius: 2px;
+}
+
+.bloom-edge-lbl {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e89a5e;
+  background: #1c1d20;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid rgba(232, 154, 94, 0.3);
+}
+
+/* Candidate Ranking Table */
+.saas-table-card { overflow: hidden; padding: 0; }
+.saas-table-responsive { width: 100%; overflow-x: auto; }
+
+.saas-ranking-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.saas-ranking-table th {
+  position: sticky;
+  top: 0;
+  background: #232428;
+  color: #a8a69e;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1.15rem 1.5rem;
+  border-bottom: 1px solid rgba(244, 243, 237, 0.08);
+  cursor: pointer;
+  user-select: none;
+}
+
+.saas-ranking-table th:hover { color: #faf9f5; }
+
+.saas-ranking-table td {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(244, 243, 237, 0.05);
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.saas-ranking-table tbody tr { transition: background 0.15s ease; }
+.saas-ranking-table tbody tr:nth-child(even) { background: rgba(244, 243, 237, 0.015); }
+.saas-ranking-table tbody tr:hover { background: rgba(218, 119, 86, 0.08); }
+
+.td-target { font-weight: 700; color: #faf9f5; }
+.td-muted { color: #a8a69e; }
+.td-conf { font-family: var(--font-mono, monospace); font-weight: 700; color: #5fa887; }
+
+.cent-bar-wrap { display: flex; align-items: center; gap: 0.75rem; }
+.cent-bar-track { width: 90px; height: 6px; background: rgba(244, 243, 237, 0.08); border-radius: 999px; overflow: hidden; }
+.cent-bar-fill { height: 100%; background: #da7756; border-radius: 999px; }
+.cent-num { font-family: var(--font-mono, monospace); font-size: 0.85rem; font-weight: 700; color: #cbd5e1; }
+
+.saas-status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.pill-approved { background: rgba(95, 168, 135, 0.15); color: #5fa887; }
+.pill-investigational { background: rgba(232, 154, 94, 0.15); color: #e89a5e; }
+
+/* Claim Verification Cards */
+.saas-claims-stack { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.saas-claim-card {
+  padding: 1.75rem 2rem;
+  border-left: 4px solid #5fa887;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.claim-top { display: flex; justify-content: space-between; align-items: center; }
+
+.claim-conf-pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(95, 168, 135, 0.15);
+  color: #5fa887;
+}
+
+.claim-stmt { margin: 0; font-size: 1.08rem; font-weight: 700; color: #faf9f5; line-height: 1.5; }
+
+.claim-rat-box {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid rgba(244, 243, 237, 0.04);
+}
+
+.rat-lbl { display: block; font-size: 0.75rem; font-weight: 700; color: #7c7a73; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem; }
+.rat-txt { margin: 0; font-size: 0.94rem; color: #cbd5e1; line-height: 1.6; }
+
+/* Accordion */
+.saas-accordion { background: #1c1d20; overflow: hidden; }
+
+.saas-accordion-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+
+.saas-accordion-summary::-webkit-details-marker { display: none; }
+
+.acc-left { display: flex; align-items: center; gap: 0.75rem; }
+.acc-title { font-size: 1.1rem; font-weight: 700; color: #faf9f5; }
+.acc-chev { color: #7c7a73; transition: transform 0.2s ease; }
+
+details[open] .acc-chev { transform: rotate(180deg); color: #da7756; }
+
+.saas-accordion-body { padding: 0 2rem 2rem; border-top: 1px solid rgba(244, 243, 237, 0.06); padding-top: 1.5rem; }
+
+.saas-prov-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.vp-box { display: flex; flex-direction: column; gap: 0.35rem; }
+.vp-lbl { font-family: var(--font-mono, monospace); font-size: 0.75rem; font-weight: 700; color: #7c7a73; text-transform: uppercase; }
+.vp-val { font-size: 0.95rem; font-weight: 600; color: #cbd5e1; }
+
+/* Sleek Enterprise Topbar & Hero */
+.saas-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2.5rem;
+  background: #0f1012;
+  border-bottom: 1px solid rgba(244, 243, 237, 0.07);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+}
+
+.saas-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.saas-brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(218, 119, 86, 0.12);
+  border: 1px solid rgba(218, 119, 86, 0.35);
+}
+
+.saas-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.saas-brand-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.saas-brand-sub {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e89a5e;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.saas-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.saas-nav {
+  display: flex;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.saas-nav .nav-tab {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.saas-nav .nav-tab:hover {
+  color: #f1f5f9;
+}
+
+.saas-nav .nav-tab.active {
+  background: #2b2c30;
+  color: #faf9f5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.saas-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.95rem;
+  background: rgba(95, 168, 135, 0.12);
+  border: 1px solid rgba(95, 168, 135, 0.3);
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #5fa887;
+}
+
+.saas-dot-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5fa887;
+  box-shadow: 0 0 10px #5fa887;
+}
+
+.saas-hero {
+  max-width: 760px;
+  margin: 3.5rem auto 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.saas-hero h1 {
+  font-family: var(--font-display);
+  font-size: 2.85rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.saas-hero p {
+  font-size: 1.12rem;
+  color: #94a3b8;
+  line-height: 1.7;
+  max-width: 650px;
+}

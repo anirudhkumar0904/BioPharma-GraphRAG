@@ -1,0 +1,28 @@
+# Core
+fastapi>=0.110.0
+uvicorn>=0.28.0
+streamlit==1.37.0
+networkx==3.3
+pyvis==0.3.2
+
+# LLM & Embeddings
+openai==1.35.0
+sentence-transformers==3.0.1
+
+# Vector Store
+chromadb==0.5.3
+
+# Data Processing
+pandas>=2.2.0
+biopython==1.84
+requests==2.32.3
+lxml==5.2.2
+
+# Graph
+neo4j==5.22.0          # optional: if using Neo4j instead of NetworkX
+matplotlib==3.9.1
+
+# Utilities
+python-dotenv==1.0.1
+tqdm==4.66.4
+pydantic==2.8.2

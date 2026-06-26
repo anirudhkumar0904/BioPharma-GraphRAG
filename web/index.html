@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BioPharma Research Portal — Knowledge Graph & Literature Discovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2026_claude">
+</head>
+<body>
+
+  <!-- Sleek Enterprise SaaS Topbar -->
+  <header class="saas-topbar">
+    <div class="saas-brand">
+      <div class="saas-brand-logo">
+        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#da7756" />
+              <stop offset="50%" stop-color="#e89a5e" />
+              <stop offset="100%" stop-color="#5fa887" />
+            </linearGradient>
+            <filter id="nodeGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="1.5" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+          <path d="M16 3L28 10V22L16 29L4 22V10L16 3Z" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linejoin="round" fill="rgba(218, 119, 86, 0.1)"/>
+          <path d="M16 3V16M16 16L28 22M16 16L4 22" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M4 10L16 16L28 10" stroke="#e89a5e" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2" opacity="0.6"/>
+          <circle cx="16" cy="3" r="2.5" fill="#da7756" filter="url(#nodeGlow)"/>
+          <circle cx="28" cy="10" r="2" fill="#e89a5e"/>
+          <circle cx="28" cy="22" r="2.5" fill="#5fa887" filter="url(#nodeGlow)"/>
+          <circle cx="16" cy="29" r="2" fill="#e89a5e"/>
+          <circle cx="4" cy="22" r="2.5" fill="#da7756" filter="url(#nodeGlow)"/>
+          <circle cx="4" cy="10" r="2" fill="#5fa887"/>
+          <circle cx="16" cy="16" r="3.5" fill="url(#logoGrad)" filter="url(#nodeGlow)"/>
+        </svg>
+      </div>
+      <div class="saas-brand-text">
+        <span class="saas-brand-title">BioPharma AI</span>
+        <span class="saas-brand-sub">Enterprise GraphRAG</span>
+      </div>
+    </div>
+    
+    <div class="saas-topbar-right">
+      <nav class="saas-nav" role="tablist">
+        <button id="tab-query" class="nav-tab active" role="tab" aria-selected="true" aria-controls="view-query">Literature Search</button>
+        <button id="tab-graph" class="nav-tab" role="tab" aria-selected="false" aria-controls="view-graph">Network Topology</button>
+      </nav>
+      <div class="saas-status-pill">
+        <span class="saas-dot-live"></span>
+        <span id="header-status-text">GRCh38 Index Connected</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Tab 1: Literature Search & Claim Verification -->
+    <section id="view-query" class="tab-view active" role="tabpanel" aria-labelledby="tab-query">
+      <div class="hero saas-hero">
+        <h1>Biomedical Discovery Workstation</h1>
+        <p>Query indexed PubMed research publications and Open Targets clinical interactome networks with automated citation verification.</p>
+        
+        <div class="search-container">
+          <form id="search-form" class="search-box" role="search">
+            <input 
+              type="text" 
+              id="search-input" 
+              class="search-input" 
+              placeholder="Search target genes, clinical conditions, or drug mechanisms (e.g. Type 2 diabetes)..." 
+              required
+            />
+            <button type="submit" id="search-btn" class="search-btn">Search</button>
+          </form>
+          
+          <div class="examples">
+            <button class="example-chip" data-example="What targets are associated with Alzheimers disease?">Alzheimer's Targets</button>
+            <button class="example-chip" data-example="Find drug repurposing candidates for Asthma">Asthma Repurposing</button>
+            <button class="example-chip" data-example="What shared genes connect Breast Cancer and Diabetes?">Oncology Links</button>
+            <button class="example-chip" data-example="Explain the mechanism of action of Metformin">Metformin Mechanism</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="results-container" class="results-area mt-results" role="region" aria-live="polite">
+        <div class="onboarding-empty-state">
+          <div class="welcome-hdr">🧬 BIOMEDICAL DISCOVERY WORKSTATION ONBOARDING</div>
+          <p class="welcome-sub">Welcome to the enterprise hybrid retrieval workstation. This suite integrates sentence-transformer PubMed vector indices with curated Open Targets knowledge graphs.</p>
+          
+          <div class="onboarding-grid">
+            <div class="onboarding-card">
+              <div class="onb-hdr">🎯 Supported Query Types</div>
+              <ul class="onb-list">
+                <li><b>Target Discovery:</b> "What targets are associated with diarrhea?"</li>
+                <li><b>Mechanism of Action:</b> "Explain how Metformin activates AMPK"</li>
+                <li><b>Pleiotropy & Links:</b> "Shared genes between Breast Cancer and Diabetes"</li>
+                <li><b>Repurposing Chains:</b> "Candidate compounds for severe refractory asthma"</li>
+              </ul>
+            </div>
+            
+            <div class="onboarding-card">
+              <div class="onb-hdr">🔑 Entity & Ontology Examples</div>
+              <div class="entity-chips-preview">
+                <span class="entity-tag gene">PRKAA1</span>
+                <span class="entity-tag gene">GLP1R</span>
+                <span class="entity-tag gene">CFTR</span>
+                <span class="entity-tag disease">Severe Asthma</span>
+                <span class="entity-tag disease">Diarrhea</span>
+                <span class="entity-tag drug">Adalimumab</span>
+                <span class="entity-tag drug">Semaglutide</span>
+              </div>
+            </div>
+            
+            <div class="onboarding-card">
+              <div class="onb-hdr">🕸️ Graph Explorer Shortcut</div>
+              <p class="onb-desc">Switch to the Cytoscape topology workspace to inspect first-degree interactome neighbors, GWAS scores, and clinical assay proof.</p>
+              <button class="action-btn shortcut-btn" id="shortcut-graph-btn">Launch Cytoscape Explorer ➔</button>
+            </div>
+            
+            <div class="onboarding-card">
+              <div class="onb-hdr">💡 Tips for Better Searches</div>
+              <ul class="onb-list">
+                <li>Use specific gene symbols (*e.g. SLC26A3*) or standard disease names.</li>
+                <li>Every query generates enterprise claim verification audit cards.</li>
+                <li>Ranking tables display degree centrality bars and affinity telemetry.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Knowledge Graph Explorer -->
+    <section id="view-graph" class="tab-view" role="tabpanel" aria-labelledby="tab-graph">
+      <div class="hero hero-graph-margin">
+        <h1>Knowledge Graph Network Topology</h1>
+        <p>Interactive Cytoscape / Neo4j Bloom workspace of multi-hop relationships connecting target genes, clinical indications, and candidate drugs.</p>
+      </div>
+
+      <!-- Analytical Graph Toolbar -->
+      <div class="graph-toolbar" role="toolbar" aria-label="Graph topology analytical filters and spotlighting controls">
+        <div class="toolbar-group">
+          <label for="graph-filter-select">Filter Category:</label>
+          <select id="graph-filter-select" class="toolbar-select" aria-label="Filter active interactome graph by entity category">
+            <option value="ALL">All Entities</option>
+            <option value="GENE">Target Genes</option>
+            <option value="DISEASE">Diseases</option>
+            <option value="DRUG">Drugs</option>
+          </select>
+        </div>
+        <div class="toolbar-group">
+          <label for="graph-focus-input">Spotlight Node:</label>
+          <input type="text" id="graph-focus-input" class="toolbar-input" placeholder="e.g. AMPK or Metformin..." aria-label="Spotlight node name in active graph"/>
+          <button id="graph-spotlight-btn" class="action-btn btn-spotlight" aria-label="Trigger spotlight focus on graph canvas">Spotlight</button>
+        </div>
+      </div>
+      
+      <div class="graph-container">
+        <iframe id="graph-iframe" class="graph-iframe" title="Interactive Knowledge Graph Network Topology Canvas" src="about:blank"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <script src="main.js?v=2026_claude"></script>
+</body>
+</html>
