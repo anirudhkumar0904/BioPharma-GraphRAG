@@ -41,7 +41,7 @@
       </div>
       <div class="saas-brand-text">
         <span class="saas-brand-title">BioPharma AI</span>
-        <span class="saas-brand-sub">Enterprise GraphRAG</span>
+        <span class="saas-brand-sub">Biomedical Discovery Engine</span>
       </div>
     </div>
     
@@ -52,7 +52,7 @@
       </nav>
       <div class="saas-status-pill">
         <span class="saas-dot-live"></span>
-        <span id="header-status-text">GRCh38 Index Connected</span>
+        <span id="header-status-text">PubMed Index: Live</span>
       </div>
     </div>
   </header>
@@ -61,8 +61,8 @@
     <!-- Tab 1: Literature Search & Claim Verification -->
     <section id="view-query" class="tab-view active" role="tabpanel" aria-labelledby="tab-query">
       <div class="hero saas-hero">
-        <h1>Biomedical Discovery Workstation</h1>
-        <p>Query indexed PubMed research publications and Open Targets clinical interactome networks with automated citation verification.</p>
+        <h1>Biomedical Discovery Platform</h1>
+        <p>Search biomedical literature and drug-target networks. Every claim cited automatically.</p>
         
         <div class="search-container">
           <form id="search-form" class="search-box" role="search">
@@ -87,48 +87,8 @@
       
       <div id="results-container" class="results-area mt-results" role="region" aria-live="polite">
         <div class="onboarding-empty-state">
-          <div class="welcome-hdr">🧬 BIOMEDICAL DISCOVERY WORKSTATION ONBOARDING</div>
-          <p class="welcome-sub">Welcome to the enterprise hybrid retrieval workstation. This suite integrates sentence-transformer PubMed vector indices with curated Open Targets knowledge graphs.</p>
-          
-          <div class="onboarding-grid">
-            <div class="onboarding-card">
-              <div class="onb-hdr">🎯 Supported Query Types</div>
-              <ul class="onb-list">
-                <li><b>Target Discovery:</b> "What targets are associated with diarrhea?"</li>
-                <li><b>Mechanism of Action:</b> "Explain how Metformin activates AMPK"</li>
-                <li><b>Pleiotropy & Links:</b> "Shared genes between Breast Cancer and Diabetes"</li>
-                <li><b>Repurposing Chains:</b> "Candidate compounds for severe refractory asthma"</li>
-              </ul>
-            </div>
-            
-            <div class="onboarding-card">
-              <div class="onb-hdr">🔑 Entity & Ontology Examples</div>
-              <div class="entity-chips-preview">
-                <span class="entity-tag gene">PRKAA1</span>
-                <span class="entity-tag gene">GLP1R</span>
-                <span class="entity-tag gene">CFTR</span>
-                <span class="entity-tag disease">Severe Asthma</span>
-                <span class="entity-tag disease">Diarrhea</span>
-                <span class="entity-tag drug">Adalimumab</span>
-                <span class="entity-tag drug">Semaglutide</span>
-              </div>
-            </div>
-            
-            <div class="onboarding-card">
-              <div class="onb-hdr">🕸️ Graph Explorer Shortcut</div>
-              <p class="onb-desc">Switch to the Cytoscape topology workspace to inspect first-degree interactome neighbors, GWAS scores, and clinical assay proof.</p>
-              <button class="action-btn shortcut-btn" id="shortcut-graph-btn">Launch Cytoscape Explorer ➔</button>
-            </div>
-            
-            <div class="onboarding-card">
-              <div class="onb-hdr">💡 Tips for Better Searches</div>
-              <ul class="onb-list">
-                <li>Use specific gene symbols (*e.g. SLC26A3*) or standard disease names.</li>
-                <li>Every query generates enterprise claim verification audit cards.</li>
-                <li>Ranking tables display degree centrality bars and affinity telemetry.</li>
-              </ul>
-            </div>
-          </div>
+          <div class="welcome-hdr">🧬 BIOMEDICAL DISCOVERY PLATFORM</div>
+          <p class="welcome-sub">Search biomedical literature and drug-target networks. Every claim cited automatically.</p>
         </div>
       </div>
     </section>
@@ -137,7 +97,7 @@
     <section id="view-graph" class="tab-view" role="tabpanel" aria-labelledby="tab-graph">
       <div class="hero hero-graph-margin">
         <h1>Knowledge Graph Network Topology</h1>
-        <p>Interactive Cytoscape / Neo4j Bloom workspace of multi-hop relationships connecting target genes, clinical indications, and candidate drugs.</p>
+        <p>Interactive workspace of multi-hop relationships connecting target genes, clinical indications, and candidate drugs.</p>
       </div>
 
       <!-- Analytical Graph Toolbar -->
@@ -159,7 +119,7 @@
       </div>
       
       <div class="graph-container">
-        <iframe id="graph-iframe" class="graph-iframe" title="Interactive Knowledge Graph Network Topology Canvas" src="about:blank"></iframe>
+        <iframe id="graph-iframe" class="graph-iframe" title="Interactive Knowledge Graph Network Topology Canvas" src="/api/graph-html?filter_type=ALL"></iframe>
       </div>
     </section>
   </main>

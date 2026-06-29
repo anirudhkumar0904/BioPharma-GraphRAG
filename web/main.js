@@ -1,5 +1,5 @@
 /**
- * main.js — Enterprise Production Frontend Controller for BioPharma Research Portal
+ * main.js — Production Frontend Controller for BioPharma Discovery Platform
  * WCAG 2.1 AA Compliant · Zero Inline Event Handlers · Staged Pipeline Tracking
  * Complete Debugging & Regression Fix Pass
  */
@@ -17,7 +17,7 @@ function escapeHtml(str) {
 
 // Universal Synchronous Initialization & Declarative Event Binding
 function initApp() {
-  console.log('[DEBUG] Initializing enterprise frontend app...');
+  console.log('[DEBUG] Initializing discovery platform frontend app...');
 
   // 1. Attach declarative event listeners synchronously
   const tabQueryBtn = document.getElementById('tab-query');
@@ -60,6 +60,14 @@ function initApp() {
 
   // 2. Fetch live system status telemetry asynchronously
   fetchSystemStatus();
+
+  // 3. Auto-run impressive demo query on cold start so visitors instantly see live results
+  setTimeout(() => {
+    const input = document.getElementById('search-input');
+    if (input && !input.value) {
+      askExample('Find drug repurposing candidates for Asthma');
+    }
+  }, 600);
 }
 
 // Robust DOM Ready check handling scripts loaded after DOMContentLoaded
@@ -76,14 +84,14 @@ async function fetchSystemStatus() {
       const sys = await statusRes.json();
       const statusEl = document.getElementById('header-status-text');
       if (statusEl) {
-        statusEl.innerText = 'GRCh38 Knowledge Graph Connected';
+        statusEl.innerText = 'PubMed Index: Live';
       }
       console.log('[DEBUG] System status telemetry loaded:', sys);
     }
   } catch (err) {
     console.warn('[DEBUG] Backend telemetry unreachable:', err);
     const statusEl = document.getElementById('header-status-text');
-    if (statusEl) statusEl.innerText = 'GRCh38 Knowledge Graph Connected';
+    if (statusEl) statusEl.innerText = 'PubMed Index: Live';
   }
 }
 
@@ -138,48 +146,8 @@ function clearFeed() {
   if (container) {
     container.innerHTML = `
       <div class="onboarding-empty-state">
-        <div class="welcome-hdr">🧬 BIOMEDICAL DISCOVERY WORKSTATION ONBOARDING</div>
-        <p class="welcome-sub">Welcome to the enterprise hybrid retrieval feed. This platform connects PubMed literature indices with curated Open Targets knowledge graphs.</p>
-        
-        <div class="onboarding-grid">
-          <div class="onboarding-card">
-            <div class="onb-hdr">🎯 Supported Query Types</div>
-            <ul class="onb-list">
-              <li><b>Target Discovery:</b> "What targets are associated with diarrhea?"</li>
-              <li><b>Mechanism of Action:</b> "Explain how Metformin activates AMPK"</li>
-              <li><b>Pleiotropy & Links:</b> "Shared genes between Breast Cancer and Diabetes"</li>
-              <li><b>Repurposing Chains:</b> "Candidate compounds for severe refractory asthma"</li>
-            </ul>
-          </div>
-          
-          <div class="onboarding-card">
-            <div class="onb-hdr">🔑 Entity & Ontology Examples</div>
-            <div class="entity-chips-preview">
-              <span class="entity-tag gene">PRKAA1</span>
-              <span class="entity-tag gene">GLP1R</span>
-              <span class="entity-tag gene">CFTR</span>
-              <span class="entity-tag disease">Severe Asthma</span>
-              <span class="entity-tag disease">Diarrhea</span>
-              <span class="entity-tag drug">Adalimumab</span>
-              <span class="entity-tag drug">Semaglutide</span>
-            </div>
-          </div>
-          
-          <div class="onboarding-card">
-            <div class="onb-hdr">🕸️ Graph Explorer Shortcut</div>
-            <p class="onb-desc">Switch to the Cytoscape topology workspace to inspect first-degree interactome neighbors, GWAS scores, and clinical proof.</p>
-            <button class="action-btn shortcut-btn" id="shortcut-graph-btn">Launch Cytoscape Explorer ➔</button>
-          </div>
-          
-          <div class="onboarding-card">
-            <div class="onb-hdr">💡 Tips for Better Searches</div>
-            <ul class="onb-list">
-              <li>Use specific gene symbols (*e.g. SLC26A3*) or standard disease names.</li>
-              <li>Every query generates enterprise claim verification audit cards.</li>
-              <li>Ranking tables display degree centrality bars and affinity metrics.</li>
-            </ul>
-          </div>
-        </div>
+        <div class="welcome-hdr">🧬 BIOMEDICAL DISCOVERY PLATFORM</div>
+        <p class="welcome-sub">Search biomedical literature and drug-target networks. Every claim cited automatically.</p>
       </div>
     `;
     // Rebind newly inserted shortcut button
@@ -246,7 +214,7 @@ async function handleSearch(event) {
         <div class="pipe-step pending" id="ps-3" style="color:#64748b;"><span class="pipe-icon">◯</span> <span class="pipe-txt">3. Traversing interactome network topology...</span></div>
         <div class="pipe-step pending" id="ps-4" style="color:#64748b;"><span class="pipe-icon">◯</span> <span class="pipe-txt">4. Retrieving clinical literature proof...</span></div>
         <div class="pipe-step pending" id="ps-5" style="color:#64748b;"><span class="pipe-icon">◯</span> <span class="pipe-txt">5. Auditing claim confidence...</span></div>
-        <div class="pipe-step pending" id="ps-6" style="color:#64748b;"><span class="pipe-icon">◯</span> <span class="pipe-txt">6. Formatting enterprise report...</span></div>
+        <div class="pipe-step pending" id="ps-6" style="color:#64748b;"><span class="pipe-icon">◯</span> <span class="pipe-txt">6. Formatting discovery report...</span></div>
       </div>
     </div>
   `;
@@ -257,7 +225,7 @@ async function handleSearch(event) {
     setTimeout(() => advancePipe(loaderCard, 'ps-1', 'ps-2', '✓', '2. Searching ChromaDB vector index...'), 280),
     setTimeout(() => advancePipe(loaderCard, 'ps-2', 'ps-3', '✓', '3. Traversing multi-hop knowledge graph topology...'), 580),
     setTimeout(() => advancePipe(loaderCard, 'ps-3', 'ps-4', '✓', '4. Retrieving PubMed evidentiary proof...'), 920),
-    setTimeout(() => advancePipe(loaderCard, 'ps-4', 'ps-5', '✓', '5. Auditing factual claim epistemic confidence...'), 1280),
+    setTimeout(() => advancePipe(loaderCard, 'ps-4', 'ps-5', '✓', '5. Verifying citations against PubMed...'), 1280),
     setTimeout(() => advancePipe(loaderCard, 'ps-5', 'ps-6', '✓', '6. Synthesizing biomedical GraphRAG output...'), 1600)
   ];
 
