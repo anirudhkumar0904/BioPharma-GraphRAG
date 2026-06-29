@@ -7,27 +7,57 @@ Stores:
 
 Uses sentence-transformers for embeddings (free, local).
 """
+import os
 import json
+
+# Prevent telemetry and limit threads to save memory on cloud free tiers (<512MB RAM)
+os.environ["ANONYMIZED_TELEMETRY"] = "False"
+os.environ["CHROMA_TELEMETRY"] = "False"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 import chromadb
 from chromadb.config import Settings
-from sentence_transformers import SentenceTransformer
 from config import CHROMA_PERSIST_DIR, EMBEDDING_MODEL
+
+
+class LazyEmbeddingFunction:
+    """Lazy loader for SentenceTransformer to prevent RAM spikes on startup."""
+    def __init__(self, model_name: str):
+        self.model_name = model_name
+        self._model = None
+
+    @property
+    def model(self):
+        if self._model is None:
+            from sentence_transformers import SentenceTransformer
+            self._model = SentenceTransformer(self.model_name)
+        return self._model
+
+    def __call__(self, input_texts: list[str]) -> list[list[float]]:
+        return self.model.encode(input_texts).tolist()
 
 
 class BioVectorStore:
     def __init__(self):
         self.client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
-        self.embedder = SentenceTransformer(EMBEDDING_MODEL)
+        self.embed_fn = LazyEmbeddingFunction(EMBEDDING_MODEL)
 
-        # Two collections: text chunks and graph relationships
+        # Two collections: text chunks and graph relationships (using custom lazy embedder to skip ONNX load)
         self.text_collection = self.client.get_or_create_collection(
             name="pubmed_chunks",
-            metadata={"hnsw:space": "cosine"}
+            metadata={"hnsw:space": "cosine"},
+            embedding_function=self.embed_fn
         )
         self.graph_collection = self.client.get_or_create_collection(
             name="graph_relations",
-            metadata={"hnsw:space": "cosine"}
+            metadata={"hnsw:space": "cosine"},
+            embedding_function=self.embed_fn
         )
+
+    @property
+    def embedder(self):
+        return self.embed_fn.model
 
     def chunk_text(self, text: str, chunk_size: int = 500, overlap: int = 100) -> list[str]:
         """Split text into overlapping chunks."""

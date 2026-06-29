@@ -1,14 +1,21 @@
 """
 server.py — FastAPI Production Web Backend for BioPharma GraphRAG
 """
+import os
+import sys
+
+# Disable telemetry and limit thread allocation to prevent cloud memory spikes (<512MB RAM)
+os.environ["ANONYMIZED_TELEMETRY"] = "False"
+os.environ["CHROMA_TELEMETRY"] = "False"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 import uvicorn
-import os
-import sys
 import time
 from datetime import datetime, timezone
 
