@@ -19,9 +19,15 @@ GRAPH_PATH = DATA_DIR / "graph.gpickle"
 for d in [DATA_DIR, RAW_DATA_DIR, PROCESSED_DATA_DIR]:
     d.mkdir(parents=True, exist_ok=True)
 
+# Set HF cache inside repo so Render packages downloaded models
+HF_CACHE_DIR = DATA_DIR / "hf_cache"
+HF_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+os.environ["HF_HOME"] = str(HF_CACHE_DIR)
+
 # ── LLM ──
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")  # cheaper, works great
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+LLM_MODEL = os.getenv("LLM_MODEL", "llama-3.3-70b-versatile" if GROQ_API_KEY else "gpt-4o-mini")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "")
 
 # ── Embeddings ──

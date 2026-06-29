@@ -5,15 +5,18 @@ Includes local GraphRAG synthesis fallback when external LLM APIs are unconfigur
 import json
 import re
 from openai import OpenAI
-from config import OPENAI_API_KEY, LLM_MODEL, OLLAMA_BASE_URL
+from config import OPENAI_API_KEY, GROQ_API_KEY, LLM_MODEL, OLLAMA_BASE_URL
 
 
 def get_llm_client():
     if OLLAMA_BASE_URL:
         return OpenAI(base_url=f"{OLLAMA_BASE_URL}/v1", api_key="ollama")
+    groq_key = GROQ_API_KEY.strip()
+    if groq_key and groq_key.lower() not in ["none", "null", "false"]:
+        return OpenAI(base_url="https://api.groq.com/openai/v1", api_key=groq_key, timeout=8.0)
     key = OPENAI_API_KEY.strip()
     if key and key.lower() not in ["none", "local", "local-mode", "null", "false", "placeholder", "sk-placeholder", "your_openai_api_key"] and key.startswith("sk-"):
-        return OpenAI(api_key=key, timeout=5.0)
+        return OpenAI(api_key=key, timeout=8.0)
     return None
 
 
