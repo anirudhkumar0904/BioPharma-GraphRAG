@@ -11,8 +11,9 @@ from config import OPENAI_API_KEY, LLM_MODEL, OLLAMA_BASE_URL
 def get_llm_client():
     if OLLAMA_BASE_URL:
         return OpenAI(base_url=f"{OLLAMA_BASE_URL}/v1", api_key="ollama")
-    if OPENAI_API_KEY:
-        return OpenAI(api_key=OPENAI_API_KEY)
+    key = OPENAI_API_KEY.strip()
+    if key and key.lower() not in ["none", "local", "local-mode", "null", "false", "placeholder", "sk-placeholder", "your_openai_api_key"] and key.startswith("sk-"):
+        return OpenAI(api_key=key, timeout=5.0)
     return None
 
 

@@ -33,12 +33,21 @@ class LazyEmbeddingFunction(chromadb.EmbeddingFunction):
     @property
     def model(self):
         if self._model is None:
+            import os
+            os.environ["TOKENIZERS_PARALLELISM"] = "false"
+            os.environ["OMP_NUM_THREADS"] = "1"
             from sentence_transformers import SentenceTransformer
             self._model = SentenceTransformer(self.model_name)
         return self._model
 
     def __call__(self, input_texts: list[str]) -> list[list[float]]:
-        return self.model.encode(input_texts).tolist()
+        try:
+            import torch
+            with torch.no_grad():
+                return self.model.encode(input_texts, show_progress_bar=False, convert_to_numpy=True).tolist()
+        except Exception as e:
+            print(f"[WARN] Embedding encoding error: {e}. Using zero-vector fallback.")
+            return [[0.0] * 384 for _ in input_texts]
 
 
 class BioVectorStore:
