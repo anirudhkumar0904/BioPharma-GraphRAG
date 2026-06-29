@@ -52,7 +52,7 @@ class LazyEmbeddingFunction(chromadb.EmbeddingFunction):
 
 class BioVectorStore:
     def __init__(self):
-        self.client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
+        self.client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR, settings=Settings(anonymized_telemetry=False))
         self.embed_fn = LazyEmbeddingFunction(EMBEDDING_MODEL)
 
         # Two collections: text chunks and graph relationships (using custom lazy embedder to skip ONNX load)
