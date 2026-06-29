@@ -71,7 +71,7 @@ def create_subgraph_viz(
     # Create pyvis network
     net = Network(
         height=height, width=width,
-        bgcolor="#0a0a0a",
+        bgcolor="#1c1d20",
         font_color="#ffffff",
         directed=True,
         notebook=False
@@ -287,7 +287,7 @@ def create_path_viz(
     """
     net = Network(
         height=height, width="100%",
-        bgcolor="#0a0a0a", font_color="#ffffff",
+        bgcolor="#1c1d20", font_color="#ffffff",
         directed=True, notebook=False
     )
 
