@@ -3,10 +3,14 @@ services:
     name: biopharma-graphrag-platform
     runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --no-cache-dir -r requirements.txt
     startCommand: python server.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: OMP_NUM_THREADS
+        value: "1"
+      - key: TOKENIZERS_PARALLELISM
+        value: "false"
       - key: OPENAI_API_KEY
         sync: false
