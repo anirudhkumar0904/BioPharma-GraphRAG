@@ -1,3 +1,9 @@
+# Build Toolchain & Core
+setuptools>=68.0.0
+wheel
+numpy>=1.26.0
+jinja2>=3.1.2
+
 # Core Web & API
 fastapi>=0.110.0
 uvicorn>=0.28.0
