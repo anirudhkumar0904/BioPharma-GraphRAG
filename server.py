@@ -11,7 +11,7 @@ os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
@@ -70,6 +70,16 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="BioPharma GraphRAG API", version="2.0.0", lifespan=lifespan)
+
+
+@app.middleware("http")
+async def disable_caching(request: Request, call_next):
+    response = await call_next(request)
+    if request.url.path == "/" or request.url.path.endswith(".html") or request.url.path.endswith(".js"):
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
 
 
 class QueryRequest(BaseModel):
