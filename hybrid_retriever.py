@@ -103,10 +103,16 @@ class HybridRetriever:
         elif query_type == "drug_repurposing" and entities:
             drugs = [e for e in entities
                     if self.G.nodes.get(e, {}).get("type") == "DRUG"]
+            diseases = [e for e in entities
+                       if self.G.nodes.get(e, {}).get("type") == "DISEASE"]
             if drugs:
                 candidates = find_drug_repurposing(self.G, drugs[0])
                 context["structured_results"] = candidates
                 context["strategy"] = f"Drug repurposing analysis for: {drugs[0]}"
+            elif diseases:
+                neighborhood = get_node_neighborhood(self.G, diseases[0], depth=2)
+                context["graph_results"] = [neighborhood]
+                context["strategy"] = f"Disease repurposing & target analysis for: {diseases[0]}"
 
         # ── Strategy 3: Entity Exploration ──
         elif query_type == "explore_entity" and entities:
