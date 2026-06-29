@@ -21,11 +21,14 @@ from chromadb.config import Settings
 from config import CHROMA_PERSIST_DIR, EMBEDDING_MODEL
 
 
-class LazyEmbeddingFunction:
+class LazyEmbeddingFunction(chromadb.EmbeddingFunction):
     """Lazy loader for SentenceTransformer to prevent RAM spikes on startup."""
     def __init__(self, model_name: str):
         self.model_name = model_name
         self._model = None
+
+    def name(self):
+        return "default"
 
     @property
     def model(self):
