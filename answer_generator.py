@@ -20,9 +20,7 @@ def get_llm_client_and_model():
     elif openai_key.startswith("gsk_"):
         key_to_use = openai_key
     else:
-        p1 = "gsk_tOdRrK20WJofizV9p"
-        p2 = "JP3WGdyb3FYX2i6nFXGp1KZpyMBrgNXAeVe"
-        key_to_use = p1 + p2
+        return None, None
         
     return OpenAI(base_url="https://api.groq.com/openai/v1", api_key=key_to_use, timeout=5.0, max_retries=0), "llama-3.3-70b-versatile"
 
@@ -178,7 +176,7 @@ def fallback_synthesize(question: str, formatted_context: str) -> str:
 
 
 def fallback_check_hallucinations(answer: str, context: str, question: str = "") -> dict:
-    q_low = question.lower() + " " + answer.lower()
+    q_low = question.lower() if question and question.strip() else answer.lower()
     if "diarrhea" in q_low:
         dynamic_claims = [
             {"claim": "SLC26A3 mutations directly impair intestinal anion transport mechanisms.", "status": "SUPPORTED", "evidence": "PMID 28910234 · Congenital Diarrhea Pedigree Study (High Confidence)"},
@@ -204,20 +202,7 @@ def fallback_check_hallucinations(answer: str, context: str, question: str = "")
             {"claim": "APOE polymorphisms influence systemic lipid homeostasis in diabetic cohorts.", "status": "SUPPORTED", "evidence": "PMID 29314810 · Lipid Cohort Audit (High Confidence)"}
         ]
     else:
-        lines = [l.strip().replace("- **", "").replace("**:", ":").replace("- ", "") for l in answer.split("\n") if l.strip().startswith("- ")]
-        if not lines:
-            lines = [l.strip() for l in context.split("\n") if len(l.strip()) > 30]
-        if not lines:
-            lines = ["All extracted entities supported by retrieved biomedical graph context."]
-        
         dynamic_claims = []
-        for idx, l in enumerate(lines[:3]):
-            claim_text = l if len(l) < 95 else l[:92] + "..."
-            dynamic_claims.append({
-                "claim": claim_text,
-                "status": "SUPPORTED",
-                "evidence": f"PMID {34102911 + idx} · Vector Index Provenance Match"
-            })
             
     return {
         "overall_score": 0.95,
@@ -285,10 +270,14 @@ def generate_answer_with_verification(question: str, formatted_context: str) -> 
     else:
         trust_badge = "🔴 Low confidence — multiple unsupported claims detected"
         
+    q_lower = question.lower()
+    template_matched = any(kw in q_lower for kw in ["diabetes", "alzheimer", "asthma", "repurpos", "cancer", "brca", "diarrhea"])
+        
     return {
         "answer": answer,
         "trust_badge": trust_badge,
         "trust_score": score,
+        "template_matched": template_matched,
         "hallucination_report": hallucination_report,
         "context_used": formatted_context[:500] + "..."
     }
